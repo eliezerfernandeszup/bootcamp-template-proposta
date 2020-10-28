@@ -1,6 +1,7 @@
 package br.com.zup.bootcamp.proposta.model;
 
 import br.com.zup.bootcamp.proposta.annotations.CpfOuCnpj;
+import br.com.zup.bootcamp.proposta.request.AnalisePropostaRequest;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Entity;
@@ -68,5 +69,9 @@ public class Proposta {
                 ", endereco='" + endereco + '\'' +
                 ", salario=" + salario +
                 '}';
+    }
+
+    public AnalisePropostaRequest toAnalisePropostaRequest() {
+        return new AnalisePropostaRequest(this.documento, this.nome, this.id);
     }
 }
