@@ -2,7 +2,6 @@ package br.com.zup.bootcamp.proposta.request;
 
 import br.com.zup.bootcamp.proposta.annotations.CpfOuCnpj;
 import br.com.zup.bootcamp.proposta.model.Proposta;
-import org.springframework.http.ResponseEntity;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;

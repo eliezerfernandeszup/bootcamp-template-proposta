@@ -55,6 +55,10 @@ public class Proposta {
         return id;
     }
 
+    public String getDocumento() {
+        return documento;
+    }
+
     @Override
     public String toString() {
         return "Proposta{" +
