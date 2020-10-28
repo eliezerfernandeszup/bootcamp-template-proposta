@@ -1,5 +1,6 @@
 package br.com.zup.bootcamp.proposta.request;
 
+import br.com.zup.bootcamp.proposta.annotations.CpfOuCnpj;
 import br.com.zup.bootcamp.proposta.model.Proposta;
 import org.springframework.http.ResponseEntity;
 
@@ -12,6 +13,7 @@ import java.math.BigDecimal;
 public class PropostaRequest {
 
     @NotBlank
+    @CpfOuCnpj(fieldName = "documento", domainClass = Proposta.class)
     private String documento;
 
     @NotBlank

@@ -23,7 +23,6 @@ public class PropostaController {
         this.propostaService = propostaService;
     }
 
-    @Transactional
     @PostMapping(value = "")
     public ResponseEntity<?> criar (@Valid @RequestBody PropostaRequest request,
                                     UriComponentsBuilder builder) {

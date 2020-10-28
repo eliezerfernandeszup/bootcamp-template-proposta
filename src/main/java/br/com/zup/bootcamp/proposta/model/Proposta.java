@@ -1,5 +1,6 @@
 package br.com.zup.bootcamp.proposta.model;
 
+import br.com.zup.bootcamp.proposta.annotations.CpfOuCnpj;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Entity;
@@ -20,6 +21,7 @@ public class Proposta {
     private String id;
 
     @NotBlank
+    @CpfOuCnpj(fieldName = "documento", domainClass = Proposta.class)
     private String documento;
 
     @NotBlank
@@ -57,6 +59,7 @@ public class Proposta {
     public String toString() {
         return "Proposta{" +
                 "documento='" + documento + '\'' +
+                ", nome='" + nome + '\'' +
                 ", email='" + email + '\'' +
                 ", endereco='" + endereco + '\'' +
                 ", salario=" + salario +
