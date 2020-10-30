@@ -1,12 +1,11 @@
 package br.com.zup.bootcamp.proposta.model;
 
 import br.com.zup.bootcamp.proposta.annotations.CpfOuCnpj;
+import br.com.zup.bootcamp.proposta.enums.PropostaStatus;
 import br.com.zup.bootcamp.proposta.request.AnalisePropostaRequest;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -38,6 +37,10 @@ public class Proposta {
     @NotNull
     @Positive
     private BigDecimal salario;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private PropostaStatus resultadoPropostaStatus;
     
     @Deprecated
     public Proposta(){
@@ -50,6 +53,7 @@ public class Proposta {
         this.email = email;
         this.endereco = endereco;
         this.salario = salario;
+        this.resultadoPropostaStatus = PropostaStatus.PENDENTE;
     }
 
     public String getId() {
@@ -68,10 +72,30 @@ public class Proposta {
                 ", email='" + email + '\'' +
                 ", endereco='" + endereco + '\'' +
                 ", salario=" + salario +
+                ", resultadoPropostaStatus=" + resultadoPropostaStatus +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Proposta proposta = (Proposta) o;
+
+        return id != null ? id.equals(proposta.id) : proposta.id == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
     }
 
     public AnalisePropostaRequest toAnalisePropostaRequest() {
         return new AnalisePropostaRequest(this.documento, this.nome, this.id);
+    }
+
+    public void atualizarStatus(PropostaStatus status) {
+        this.resultadoPropostaStatus = status;
     }
 }
