@@ -30,3 +30,8 @@ servicos-externos:
   base-url: http://localhost:9999
 
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include=health,metrics,prometheus:
