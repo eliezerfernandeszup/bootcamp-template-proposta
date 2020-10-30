@@ -18,8 +18,6 @@ public class PropostaService {
     private final DocumentoUnicoValidator valorUnicoValidator;
     private final AvaliaProposta avaliaProposta;
 
-    private final Logger log = LoggerFactory.getLogger(PropostaService.class);
-
     public PropostaService(PropostaRepository propostaRepository, DocumentoUnicoValidator valorUnicoValidator,
                            AvaliaProposta avaliaProposta) {
         this.propostaRepository = propostaRepository;
@@ -34,7 +32,7 @@ public class PropostaService {
         }
 
         final var propostaSalva = this.propostaRepository.save(proposta);
-        final var analisePropostaRequest = proposta.toAnalisePropostaRequest();
+        final var analisePropostaRequest = propostaSalva.toAnalisePropostaRequest();
 
         AnalisePropostaStatus avaliacao = this.avaliaProposta.avaliar(analisePropostaRequest).getResultadoSolicitacao();
 
