@@ -28,10 +28,15 @@ feign:
 #Urls de servicos externos
 servicos-externos:
   base-url: http://localhost:9999
+  cartoes: http://localhost:8888
 
-
+##health-check
 management:
   endpoints:
     web:
       exposure:
         include=health,metrics,prometheus:
+
+#health-check
+periodicidade-schedue:
+  criar-cartao : 1000
