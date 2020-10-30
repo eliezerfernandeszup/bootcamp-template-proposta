@@ -1,0 +1,32 @@
+# Spring DATASOURCE (DataSourceAutoConfiguration & DataSourceProperties)
+# Hibernate Properties
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    password: password
+    url: jdbc:postgresql://localhost:5432/proposta
+    username: keycloak
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        temp:
+          use_jdbc_metadata_defaults: false
+    show-sql: true
+
+#timeouts do Feign
+feign:
+  client:
+    config:
+      analise-proposta:
+        connect-timeout: 100
+        read-timeout: 100
+
+#Urls de servicos externos
+servicos-externos:
+  base-url: http://localhost:9999
+
+
