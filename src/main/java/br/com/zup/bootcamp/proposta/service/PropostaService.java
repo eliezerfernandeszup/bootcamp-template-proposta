@@ -28,7 +28,7 @@ public class PropostaService {
     public Proposta criar(Proposta proposta) throws JsonProcessingException {
 
         if (!valorUnicoValidator.isValid(proposta)){
-            throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY);
+            throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "Não foi possível continuar com a solicitação");
         }
 
         final var propostaSalva = this.propostaRepository.save(proposta);

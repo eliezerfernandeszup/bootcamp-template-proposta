@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 @Service
 public class AvaliaProposta {
@@ -26,12 +27,13 @@ public class AvaliaProposta {
         logger.info("[Análise financeira] : Realizando análise da proposta: {}", request.getIdProposta());
 
         try {
-            this.analiseResponse = this.analisePropostaCliente.getAnalise(request).getBody();
+            analiseResponse = this.analisePropostaCliente.getAnalise(request).getBody();
         } catch (FeignException e) {
             if (HttpStatus.UNPROCESSABLE_ENTITY.equals(e.status())){
-                this.analiseResponse = new ObjectMapper().readValue(e.contentUTF8(), ResultadoAnaliseResponse.class);
+                analiseResponse = new ObjectMapper().readValue(e.contentUTF8(), ResultadoAnaliseResponse.class);
             }
         }
+        Assert.notNull(analiseResponse, "Não foi possíve realizar a análise.");
 
         return analiseResponse;
     }
