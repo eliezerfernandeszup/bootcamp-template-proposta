@@ -15,7 +15,7 @@ spring:
         format_sql: true
         temp:
           use_jdbc_metadata_defaults: false
-    show-sql: true
+    show-sql: false
 
 #timeouts do Feign
 feign:

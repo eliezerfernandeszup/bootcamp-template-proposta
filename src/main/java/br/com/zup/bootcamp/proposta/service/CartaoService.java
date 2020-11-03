@@ -29,7 +29,7 @@ public class CartaoService {
     public void verificarCartao(){
         logger.info("Scheduled: verificando se existe cartao na proposta" );
 
-        Collection<Proposta> propostas = propostaRepository.findByPropostaStatus(PropostaStatus.ELEGIVEL);
+        Collection<Proposta> propostas = propostaRepository.findByPropostaStatusAndCartaoCriado(PropostaStatus.ELEGIVEL, false);
 
         propostas.forEach( proposta -> {
                 try {
