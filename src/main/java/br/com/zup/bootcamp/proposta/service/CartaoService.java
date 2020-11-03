@@ -31,23 +31,22 @@ public class CartaoService {
 
         Collection<Proposta> propostas = propostaRepository.findByPropostaStatusAndCartaoCriado(PropostaStatus.ELEGIVEL, false);
 
-        propostas.forEach( proposta -> {
-                try {
-                    CartaoResponse response = cartoesCliente.getAnalise(proposta.toAnalisePropostaRequest().getIdProposta());
+        for (Proposta proposta : propostas) {
+            try {
+                CartaoResponse response = cartoesCliente.getAnalise(proposta.toAnalisePropostaRequest().getIdProposta());
 
-                    proposta.atualizarStatus(PropostaStatus.CONCLUIDA);
-                    proposta.setCartaoCriado(true);
-                    proposta.setCartao(response.toCartao());
+                proposta.atualizarStatus(PropostaStatus.CONCLUIDA);
+                proposta.setCartaoCriado(true);
+                proposta.setCartao(response.toCartao());
 
-                    propostaRepository.save(proposta);
+                propostaRepository.save(proposta);
 
-                    logger.info("Scheduled: --- Cartão criado: {}", response.getIdProposta());
+                logger.info("Scheduled: --- Cartão criado: {}", response.getIdProposta());
 
-                }catch (FeignException e) {
-                    logger.warn(e.contentUTF8());
-                }
+            } catch (FeignException e) {
+                logger.warn(e.contentUTF8());
             }
-        );
+        }
 
     }
 }
