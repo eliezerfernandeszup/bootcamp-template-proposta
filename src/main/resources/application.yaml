@@ -39,4 +39,4 @@ management:
 
 #health-check
 periodicidade-schedue:
-  criar-cartao : 1000
+  criar-cartao : 3000
