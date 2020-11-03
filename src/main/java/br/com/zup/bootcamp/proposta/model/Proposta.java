@@ -41,7 +41,7 @@ public class Proposta {
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    private PropostaStatus resultadoPropostaStatus;
+    private PropostaStatus propostaStatus;
 
     @NotNull
     private boolean cartaoCriado;
@@ -61,7 +61,7 @@ public class Proposta {
         this.email = email;
         this.endereco = endereco;
         this.salario = salario;
-        this.resultadoPropostaStatus = PropostaStatus.PENDENTE;
+        this.propostaStatus = PropostaStatus.PENDENTE;
         this.cartaoCriado = false;
     }
 
@@ -89,7 +89,7 @@ public class Proposta {
                 ", email='" + email + '\'' +
                 ", endereco='" + endereco + '\'' +
                 ", salario=" + salario +
-                ", resultadoPropostaStatus=" + resultadoPropostaStatus +
+                ", propostaStatus=" + propostaStatus +
                 '}';
     }
 
@@ -116,6 +116,6 @@ public class Proposta {
     }
 
     public void atualizarStatus(PropostaStatus status) {
-        this.resultadoPropostaStatus = status;
+        this.propostaStatus = status;
     }
 }
