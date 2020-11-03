@@ -3,6 +3,7 @@ package br.com.zup.bootcamp.proposta.model;
 import br.com.zup.bootcamp.proposta.annotations.CpfOuCnpj;
 import br.com.zup.bootcamp.proposta.enums.PropostaStatus;
 import br.com.zup.bootcamp.proposta.request.AnalisePropostaRequest;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -41,7 +42,14 @@ public class Proposta {
     @NotNull
     @Enumerated(EnumType.STRING)
     private PropostaStatus resultadoPropostaStatus;
-    
+
+    @NotNull
+    private boolean cartaoCriado;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "proposta_id")
+    private Cartao cartao;
+
     @Deprecated
     public Proposta(){
     }
@@ -54,6 +62,7 @@ public class Proposta {
         this.endereco = endereco;
         this.salario = salario;
         this.resultadoPropostaStatus = PropostaStatus.PENDENTE;
+        this.cartaoCriado = false;
     }
 
     public String getId() {
@@ -62,6 +71,14 @@ public class Proposta {
 
     public String getDocumento() {
         return documento;
+    }
+
+    public void setCartaoCriado(boolean cartaoCriado) {
+        this.cartaoCriado = cartaoCriado;
+    }
+
+    public void setCartao(Cartao cartao) {
+        this.cartao = cartao;
     }
 
     @Override
@@ -83,12 +100,15 @@ public class Proposta {
 
         Proposta proposta = (Proposta) o;
 
-        return id != null ? id.equals(proposta.id) : proposta.id == null;
+        if (id != null ? !id.equals(proposta.id) : proposta.id != null) return false;
+        return cartao != null ? cartao.equals(proposta.cartao) : proposta.cartao == null;
     }
 
     @Override
     public int hashCode() {
-        return id != null ? id.hashCode() : 0;
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (cartao != null ? cartao.hashCode() : 0);
+        return result;
     }
 
     public AnalisePropostaRequest toAnalisePropostaRequest() {
