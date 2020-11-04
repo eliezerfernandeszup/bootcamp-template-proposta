@@ -1,7 +1,7 @@
 package br.com.zup.bootcamp.proposta.service;
 
-import br.com.zup.bootcamp.proposta.request.AnalisePropostaRequest;
-import br.com.zup.bootcamp.proposta.response.ResultadoAnaliseResponse;
+import br.com.zup.bootcamp.proposta.model.request.AnalisePropostaRequest;
+import br.com.zup.bootcamp.proposta.model.response.ResultadoAnaliseResponse;
 import br.com.zup.bootcamp.proposta.service.feign.AnalisePropostaCliente;
 import com.google.gson.Gson;
 import feign.FeignException;

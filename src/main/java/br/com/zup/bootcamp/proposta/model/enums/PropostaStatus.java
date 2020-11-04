@@ -1,4 +1,4 @@
-package br.com.zup.bootcamp.proposta.enums;
+package br.com.zup.bootcamp.proposta.model.enums;
 
 public enum PropostaStatus {
     PENDENTE,

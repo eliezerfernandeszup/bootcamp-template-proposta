@@ -1,9 +1,8 @@
 package br.com.zup.bootcamp.proposta.model;
 
 import br.com.zup.bootcamp.proposta.annotations.CpfOuCnpj;
-import br.com.zup.bootcamp.proposta.enums.PropostaStatus;
-import br.com.zup.bootcamp.proposta.request.AnalisePropostaRequest;
-import org.hibernate.annotations.Cascade;
+import br.com.zup.bootcamp.proposta.model.enums.PropostaStatus;
+import br.com.zup.bootcamp.proposta.model.request.AnalisePropostaRequest;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;

@@ -2,7 +2,7 @@ package br.com.zup.bootcamp.proposta.controller;
 
 import br.com.zup.bootcamp.proposta.model.Proposta;
 import br.com.zup.bootcamp.proposta.repository.PropostaRepository;
-import br.com.zup.bootcamp.proposta.response.PropostaResponse;
+import br.com.zup.bootcamp.proposta.model.response.PropostaResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

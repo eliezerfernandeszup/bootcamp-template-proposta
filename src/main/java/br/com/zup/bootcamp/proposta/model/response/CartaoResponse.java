@@ -1,4 +1,4 @@
-package br.com.zup.bootcamp.proposta.response;
+package br.com.zup.bootcamp.proposta.model.response;
 
 import br.com.zup.bootcamp.proposta.model.Cartao;
 

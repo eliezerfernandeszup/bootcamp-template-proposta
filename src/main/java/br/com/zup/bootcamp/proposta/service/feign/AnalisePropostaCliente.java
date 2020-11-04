@@ -1,7 +1,7 @@
 package br.com.zup.bootcamp.proposta.service.feign;
 
-import br.com.zup.bootcamp.proposta.request.AnalisePropostaRequest;
-import br.com.zup.bootcamp.proposta.response.ResultadoAnaliseResponse;
+import br.com.zup.bootcamp.proposta.model.request.AnalisePropostaRequest;
+import br.com.zup.bootcamp.proposta.model.response.ResultadoAnaliseResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
