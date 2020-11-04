@@ -12,6 +12,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Entity
 public class Proposta {
@@ -19,7 +20,7 @@ public class Proposta {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    private String id;
+    private UUID id;
 
     @NotBlank
     @CpfOuCnpj(fieldName = "documento", domainClass = Proposta.class)
@@ -65,7 +66,7 @@ public class Proposta {
         this.cartaoCriado = false;
     }
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 

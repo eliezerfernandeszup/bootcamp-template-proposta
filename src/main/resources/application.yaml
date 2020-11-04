@@ -3,9 +3,9 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    password: password
     url: jdbc:postgresql://localhost:5432/proposta
     username: keycloak
+    password: password
   jpa:
     hibernate:
       ddl-auto: update
@@ -39,4 +39,5 @@ management:
 
 #health-check
 periodicidade-schedue:
-  criar-cartao : 3000
+  criar-cartao : 5000
+

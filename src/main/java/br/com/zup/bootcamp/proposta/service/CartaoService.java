@@ -33,7 +33,7 @@ public class CartaoService {
 
         for (Proposta proposta : propostas) {
             try {
-                CartaoResponse response = cartoesCliente.getAnalise(proposta.toAnalisePropostaRequest().getIdProposta());
+                CartaoResponse response = cartoesCliente.getAnalise(proposta.toAnalisePropostaRequest().getIdProposta().toString());
 
                 proposta.atualizarStatus(PropostaStatus.CONCLUIDA);
                 proposta.setCartaoCriado(true);
@@ -47,6 +47,5 @@ public class CartaoService {
                 logger.warn(e.contentUTF8());
             }
         }
-
     }
 }

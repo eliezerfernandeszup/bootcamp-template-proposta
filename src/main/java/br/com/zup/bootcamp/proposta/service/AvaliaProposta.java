@@ -3,8 +3,7 @@ package br.com.zup.bootcamp.proposta.service;
 import br.com.zup.bootcamp.proposta.request.AnalisePropostaRequest;
 import br.com.zup.bootcamp.proposta.response.ResultadoAnaliseResponse;
 import br.com.zup.bootcamp.proposta.service.feign.AnalisePropostaCliente;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import feign.FeignException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +22,7 @@ public class AvaliaProposta {
         this.analisePropostaCliente = analisePropostaCliente;
     }
 
-    public ResultadoAnaliseResponse avaliar(AnalisePropostaRequest request) throws JsonProcessingException {
+    public ResultadoAnaliseResponse avaliar(AnalisePropostaRequest request) {
 
         logger.info("[Análise financeira] : Realizando análise da proposta: {}", request.getIdProposta());
 
@@ -31,7 +30,7 @@ public class AvaliaProposta {
             analiseResponse = this.analisePropostaCliente.getAnalise(request).getBody();
         } catch (FeignException e) {
             if (e.status() == HttpStatus.UNPROCESSABLE_ENTITY.value()){
-                analiseResponse = new ObjectMapper().readValue(e.contentUTF8(), ResultadoAnaliseResponse.class);
+                analiseResponse = new Gson().fromJson(e.contentUTF8(), ResultadoAnaliseResponse.class);
             }
         }
         Assert.notNull(analiseResponse, "Não foi possíve realizar a análise.");

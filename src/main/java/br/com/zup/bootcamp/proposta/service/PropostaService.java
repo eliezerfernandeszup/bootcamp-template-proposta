@@ -4,9 +4,6 @@ import br.com.zup.bootcamp.proposta.enums.AnalisePropostaStatus;
 import br.com.zup.bootcamp.proposta.model.Proposta;
 import br.com.zup.bootcamp.proposta.repository.PropostaRepository;
 import br.com.zup.bootcamp.proposta.validators.DocumentoUnicoValidator;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -25,7 +22,7 @@ public class PropostaService {
         this.avaliaProposta = avaliaProposta;
     }
 
-    public Proposta criar(Proposta proposta) throws JsonProcessingException {
+    public Proposta criar(Proposta proposta) {
 
         if (!valorUnicoValidator.isValid(proposta)){
             throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "Não foi possível continuar com a solicitação");
