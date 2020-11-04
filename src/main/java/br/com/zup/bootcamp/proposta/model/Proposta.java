@@ -74,6 +74,30 @@ public class Proposta {
         return documento;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public BigDecimal getSalario() {
+        return salario;
+    }
+
+    public PropostaStatus getPropostaStatus() {
+        return propostaStatus;
+    }
+
+    public boolean isCartaoCriado() {
+        return cartaoCriado;
+    }
+
     public void setCartaoCriado(boolean cartaoCriado) {
         this.cartaoCriado = cartaoCriado;
     }
