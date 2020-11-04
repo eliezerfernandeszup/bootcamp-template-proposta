@@ -1,12 +1,13 @@
 package br.com.zup.bootcamp.proposta.model;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.util.Assert;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -22,6 +23,9 @@ public class Cartao {
 
     @NotNull
     private LocalDateTime emitidoEm;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<Biometria> biometrias = new HashSet<>();
 
     @Deprecated
     public Cartao(){
@@ -54,6 +58,11 @@ public class Cartao {
 
     public void setEmitidoEm(LocalDateTime emitidoEm) {
         this.emitidoEm = emitidoEm;
+    }
+
+    public void setBiometria(Biometria biometria) {
+        Assert.notNull(biometria, "A biometria não pode ser nula");
+        biometrias.add(biometria);
     }
 
     @Override
