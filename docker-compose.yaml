@@ -16,7 +16,6 @@
 
     pgadmin4:
       image: dpage/pgadmin4:4.10
-      container_name: "pgadmin"
       environment:
         PGADMIN_DEFAULT_EMAIL: "admin@gmail.com"
         PGADMIN_DEFAULT_PASSWORD: "secret"

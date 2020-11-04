@@ -1,6 +1,7 @@
 package br.com.zup.bootcamp.proposta.request;
 
 import javax.validation.constraints.NotBlank;
+import java.util.UUID;
 
 public class AnalisePropostaRequest {
 
@@ -11,9 +12,9 @@ public class AnalisePropostaRequest {
     private String nome;
 
     @NotBlank
-    private String idProposta;
+    private UUID idProposta;
 
-    public AnalisePropostaRequest(@NotBlank String documento, @NotBlank String nome, @NotBlank String idProposta) {
+    public AnalisePropostaRequest(@NotBlank String documento, @NotBlank String nome, UUID idProposta) {
         this.documento = documento;
         this.nome = nome;
         this.idProposta = idProposta;
@@ -27,7 +28,7 @@ public class AnalisePropostaRequest {
         return nome;
     }
 
-    public String getIdProposta() {
+    public UUID getIdProposta() {
         return idProposta;
     }
 

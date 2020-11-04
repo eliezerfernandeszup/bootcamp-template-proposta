@@ -12,5 +12,5 @@ public interface PropostaRepository extends CrudRepository<Proposta, String> {
 
     List<Proposta> findByDocumento(String documento);
 
-    List<Proposta> findByResultadoPropostaStatus(PropostaStatus propostaStatus);
+    List<Proposta> findByPropostaStatusAndCartaoCriado(PropostaStatus propostaStatus, boolean valor);
 }

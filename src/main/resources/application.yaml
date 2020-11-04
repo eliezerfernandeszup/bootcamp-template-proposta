@@ -3,9 +3,9 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    password: password
     url: jdbc:postgresql://localhost:5432/proposta
     username: keycloak
+    password: password
   jpa:
     hibernate:
       ddl-auto: update
@@ -15,7 +15,7 @@ spring:
         format_sql: true
         temp:
           use_jdbc_metadata_defaults: false
-    show-sql: true
+    show-sql: false
 
 #timeouts do Feign
 feign:
@@ -39,4 +39,5 @@ management:
 
 #health-check
 periodicidade-schedue:
-  criar-cartao : 1000
+  criar-cartao : 5000
+

@@ -2,7 +2,6 @@ package br.com.zup.bootcamp.proposta.controller;
 
 import br.com.zup.bootcamp.proposta.request.PropostaRequest;
 import br.com.zup.bootcamp.proposta.service.PropostaService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 @RestController
@@ -23,8 +23,8 @@ public class PropostaController {
     }
 
     @PostMapping(value = "")
-    public ResponseEntity<?> criar (@Valid @RequestBody PropostaRequest request,
-                                    UriComponentsBuilder builder) throws JsonProcessingException {
+    @Transactional
+    public ResponseEntity<?> criar (@Valid @RequestBody PropostaRequest request, UriComponentsBuilder builder) {
 
         final var proposta = propostaService.criar(request.toModel());
 
