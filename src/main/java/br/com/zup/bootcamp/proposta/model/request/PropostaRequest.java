@@ -1,4 +1,4 @@
-package br.com.zup.bootcamp.proposta.request;
+package br.com.zup.bootcamp.proposta.model.request;
 
 import br.com.zup.bootcamp.proposta.annotations.CpfOuCnpj;
 import br.com.zup.bootcamp.proposta.model.Proposta;

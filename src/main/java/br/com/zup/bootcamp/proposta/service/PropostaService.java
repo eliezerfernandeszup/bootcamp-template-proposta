@@ -1,6 +1,6 @@
 package br.com.zup.bootcamp.proposta.service;
 
-import br.com.zup.bootcamp.proposta.enums.AnalisePropostaStatus;
+import br.com.zup.bootcamp.proposta.model.enums.AnalisePropostaStatus;
 import br.com.zup.bootcamp.proposta.model.Proposta;
 import br.com.zup.bootcamp.proposta.repository.PropostaRepository;
 import br.com.zup.bootcamp.proposta.validators.DocumentoUnicoValidator;

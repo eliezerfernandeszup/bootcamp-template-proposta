@@ -1,6 +1,6 @@
 package br.com.zup.bootcamp.proposta.service.feign;
 
-import br.com.zup.bootcamp.proposta.response.CartaoResponse;
+import br.com.zup.bootcamp.proposta.model.response.CartaoResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;

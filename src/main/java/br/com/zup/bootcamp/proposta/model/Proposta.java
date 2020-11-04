@@ -1,9 +1,8 @@
 package br.com.zup.bootcamp.proposta.model;
 
 import br.com.zup.bootcamp.proposta.annotations.CpfOuCnpj;
-import br.com.zup.bootcamp.proposta.enums.PropostaStatus;
-import br.com.zup.bootcamp.proposta.request.AnalisePropostaRequest;
-import org.hibernate.annotations.Cascade;
+import br.com.zup.bootcamp.proposta.model.enums.PropostaStatus;
+import br.com.zup.bootcamp.proposta.model.request.AnalisePropostaRequest;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -72,6 +71,30 @@ public class Proposta {
 
     public String getDocumento() {
         return documento;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public BigDecimal getSalario() {
+        return salario;
+    }
+
+    public PropostaStatus getPropostaStatus() {
+        return propostaStatus;
+    }
+
+    public boolean isCartaoCriado() {
+        return cartaoCriado;
     }
 
     public void setCartaoCriado(boolean cartaoCriado) {

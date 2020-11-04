@@ -1,4 +1,4 @@
-package br.com.zup.bootcamp.proposta.request;
+package br.com.zup.bootcamp.proposta.model.request;
 
 import javax.validation.constraints.NotBlank;
 import java.util.UUID;

@@ -1,6 +1,6 @@
-package br.com.zup.bootcamp.proposta.response;
+package br.com.zup.bootcamp.proposta.model.response;
 
-import br.com.zup.bootcamp.proposta.enums.AnalisePropostaStatus;
+import br.com.zup.bootcamp.proposta.model.enums.AnalisePropostaStatus;
 
 public class ResultadoAnaliseResponse {
 

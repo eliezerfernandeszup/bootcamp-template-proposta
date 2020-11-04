@@ -1,9 +1,9 @@
 package br.com.zup.bootcamp.proposta.service;
 
-import br.com.zup.bootcamp.proposta.enums.PropostaStatus;
+import br.com.zup.bootcamp.proposta.model.enums.PropostaStatus;
 import br.com.zup.bootcamp.proposta.model.Proposta;
 import br.com.zup.bootcamp.proposta.repository.PropostaRepository;
-import br.com.zup.bootcamp.proposta.response.CartaoResponse;
+import br.com.zup.bootcamp.proposta.model.response.CartaoResponse;
 import br.com.zup.bootcamp.proposta.service.feign.CartoesCliente;
 import feign.FeignException;
 import org.slf4j.Logger;
