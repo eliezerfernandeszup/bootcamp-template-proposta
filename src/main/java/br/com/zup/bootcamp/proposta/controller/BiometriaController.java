@@ -41,7 +41,7 @@ public class BiometriaController {
         cartao.setBiometria(biometria);
         cartaoRepository.save(cartao);
 
-        logger.info("[Cadastro de biometria] - Biometria: {} - Cartão id: {}", biometria.getId(), cartao.getId());
+        logger.info("[Cadastro de biometria] - Biometria do Cartão id: {}", cartao.getId());
 
         return ResponseEntity.created(builder.path("/api/cartoes/{id}").buildAndExpand(cartao.getId()).toUri()).build();
     }

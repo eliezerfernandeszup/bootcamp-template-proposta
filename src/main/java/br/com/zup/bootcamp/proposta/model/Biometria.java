@@ -27,6 +27,10 @@ public class Biometria {
         this.fingerprint = fingerprint.getBytes();
     }
 
+    public byte[] getFingerprint() {
+        return fingerprint;
+    }
+
     public UUID getId() {
         return id;
     }
