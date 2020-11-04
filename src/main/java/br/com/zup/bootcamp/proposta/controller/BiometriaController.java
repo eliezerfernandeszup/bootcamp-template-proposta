@@ -4,6 +4,8 @@ import br.com.zup.bootcamp.proposta.model.Biometria;
 import br.com.zup.bootcamp.proposta.model.Cartao;
 import br.com.zup.bootcamp.proposta.model.request.BiometriaRequest;
 import br.com.zup.bootcamp.proposta.repository.CartaoRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -17,6 +19,7 @@ import java.util.UUID;
 public class BiometriaController {
 
     private final CartaoRepository cartaoRepository;
+    private Logger logger = LoggerFactory.getLogger(Biometria.class);
 
     public BiometriaController(CartaoRepository cartaoRepository) {
         this.cartaoRepository = cartaoRepository;
@@ -26,18 +29,20 @@ public class BiometriaController {
     public ResponseEntity<?> criarBiometria (@PathVariable UUID idCartao, @RequestBody @Valid BiometriaRequest request,
                                              UriComponentsBuilder builder) {
 
-        Optional<Cartao> cartao = cartaoRepository.findById(idCartao);
+        Optional<Cartao> cartaoBuscado = cartaoRepository.findById(idCartao);
         Biometria biometria = request.toBiometria();
 
-        if (cartao.isEmpty()){
-            ResponseEntity.badRequest().build();
+        if (cartaoBuscado.isEmpty()){
+            logger.warn("[Cadastro de biometria]: Não foi possível encontrar o cartão [id]: {}", idCartao);
+            return ResponseEntity.notFound().build();
         }
 
-        cartao.get().setBiometria(biometria);
-        cartaoRepository.save(cartao.get());
+        Cartao cartao = cartaoBuscado.get();
+        cartao.setBiometria(biometria);
+        cartaoRepository.save(cartao);
 
-        return ResponseEntity.created(builder.path("/api/cartoes/{id}")
-                .buildAndExpand(cartao.get().getId()).toUri())
-                .build();
+        logger.info("[Cadastro de biometria] - Biometria: {} - Cartão id: {}", biometria.getId(), cartao.getId());
+
+        return ResponseEntity.created(builder.path("/api/cartoes/{id}").buildAndExpand(cartao.getId()).toUri()).build();
     }
 }
