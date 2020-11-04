@@ -30,7 +30,7 @@ public class AvaliaProposta {
         try {
             analiseResponse = this.analisePropostaCliente.getAnalise(request).getBody();
         } catch (FeignException e) {
-            if (HttpStatus.UNPROCESSABLE_ENTITY.equals(e.status())){
+            if (e.status() == HttpStatus.UNPROCESSABLE_ENTITY.value()){
                 analiseResponse = new ObjectMapper().readValue(e.contentUTF8(), ResultadoAnaliseResponse.class);
             }
         }
