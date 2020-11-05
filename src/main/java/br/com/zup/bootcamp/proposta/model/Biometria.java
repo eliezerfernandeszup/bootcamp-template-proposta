@@ -1,11 +1,13 @@
 package br.com.zup.bootcamp.proposta.model;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -18,6 +20,9 @@ public class Biometria {
 
     @NotNull
     private byte[] fingerprint;
+
+    @CreationTimestamp
+    private LocalDateTime momentoAssociado;
 
     @Deprecated
     public Biometria(){

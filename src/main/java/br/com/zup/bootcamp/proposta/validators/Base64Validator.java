@@ -15,7 +15,6 @@ public class Base64Validator implements ConstraintValidator<Base64, String> {
 
     @Override
     public boolean isValid(String valor, ConstraintValidatorContext context) {
-        System.out.println(isBase64(valor));
         return valor != null && isBase64(valor);
     }
 }
