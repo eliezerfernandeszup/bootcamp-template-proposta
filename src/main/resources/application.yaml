@@ -16,6 +16,13 @@ spring:
         temp:
           use_jdbc_metadata_defaults: false
     show-sql: false
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${KEYCLOAK_ISSUER_URI:http://localhost:18080/auth/realms/nosso-cartao}
+          jwk-set-uri: ${KEYCLOAK_JWKS_URI:http://localhost:18080/auth/realms/nosso-cartao/protocol/openid-connect/certs}
+
 
 #timeouts do Feign
 feign:
@@ -40,4 +47,3 @@ management:
 #health-check
 periodicidade-schedue:
   criar-cartao : 5000
-
