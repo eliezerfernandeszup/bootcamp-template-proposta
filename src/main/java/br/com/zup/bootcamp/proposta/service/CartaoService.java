@@ -33,7 +33,7 @@ public class CartaoService {
 
         for (Proposta proposta : propostas) {
             try {
-                CartaoResponse response = cartoesCliente.getAnalise(proposta.toAnalisePropostaRequest().getIdProposta().toString());
+                CartaoResponse response = cartoesCliente.buscarCartaoPorIdProposta(proposta.toAnalisePropostaRequest().getIdProposta().toString());
 
                 proposta.atualizarStatus(PropostaStatus.CONCLUIDA);
                 proposta.setCartaoCriado(true);
@@ -41,7 +41,7 @@ public class CartaoService {
 
                 propostaRepository.save(proposta);
 
-                logger.info("Scheduled: --- Cartão criado: {}", response.getIdProposta());
+                logger.info("Scheduled: --- Cartão criado: {}", response.getId());
 
             } catch (FeignException e) {
                 logger.warn(e.contentUTF8());
