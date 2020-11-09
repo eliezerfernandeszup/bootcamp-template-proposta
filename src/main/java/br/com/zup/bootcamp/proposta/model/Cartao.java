@@ -34,6 +34,9 @@ public class Cartao {
     @OneToMany(cascade = CascadeType.ALL)
     private Set<Bloqueio> bloqueios = new HashSet<>();
 
+    @OneToMany(cascade = CascadeType.PERSIST)
+    private Set<Aviso> avisosViagens = new HashSet<>();
+
     @Deprecated
     public Cartao(){
     }
@@ -76,6 +79,11 @@ public class Cartao {
     public void setBloqueios(Bloqueio bloqueio) {
         Assert.notNull(bloqueio, "O bloqueio não pode ser nula");
         bloqueios.add(bloqueio);
+    }
+
+    public void setAvisosViagens(Aviso aviso) {
+        Assert.notNull(aviso, "O aviso não pode ser nulo");
+        avisosViagens.add(aviso);
     }
 
     public void bloquearCartao() {

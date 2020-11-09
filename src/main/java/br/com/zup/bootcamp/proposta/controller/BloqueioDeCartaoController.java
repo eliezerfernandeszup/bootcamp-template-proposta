@@ -44,7 +44,7 @@ public class BloqueioDeCartaoController {
             return ResponseEntity.notFound().build();
         }
 
-        Bloqueio bloqueio = new Bloqueio(request.getRemoteAddr(), request.getHeader(HttpHeaders.USER_AGENT));
+        Bloqueio bloqueio = new Bloqueio(request);
         Cartao cartao = cartaoBuscado.get();
 
         bloqueioService.processarBloqueio(cartao);
