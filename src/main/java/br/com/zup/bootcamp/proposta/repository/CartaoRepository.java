@@ -11,4 +11,6 @@ import java.util.UUID;
 public interface CartaoRepository extends CrudRepository<Cartao, String> {
 
     Optional<Cartao> findById(UUID idCartao);
+
+    Optional<Cartao> findByNumeroCartao(UUID idCartao);
 }

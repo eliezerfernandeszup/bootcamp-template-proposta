@@ -1,5 +1,6 @@
 package br.com.zup.bootcamp.proposta.service.feign;
 
+import br.com.zup.bootcamp.proposta.model.request.BloqueioRequest;
 import br.com.zup.bootcamp.proposta.model.response.CartaoResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +16,7 @@ public interface CartoesCliente {
     CartaoResponse buscarCartaoPorIdProposta(@RequestParam String idProposta);
 
     @PostMapping("/api/cartoes/{id}/bloqueios")
-    ResponseEntity<CartaoResponse> bloquearCartao(@PathVariable UUID id, @RequestBody Map sistemaResponsavel);
+    ResponseEntity<CartaoResponse> bloquearCartao(@PathVariable UUID id, @RequestBody BloqueioRequest sistemaResponsavel);
 
 
 }

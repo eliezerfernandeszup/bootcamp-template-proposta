@@ -8,7 +8,10 @@ import br.com.zup.bootcamp.proposta.service.BloqueioService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,7 +35,7 @@ public class BloqueioDeCartaoController {
     public ResponseEntity<?> bloquearCartao (@PathVariable UUID idCartao, UriComponentsBuilder builder ,
                                              HttpServletRequest request) {
 
-        Optional<Cartao> cartaoBuscado = cartaoRepository.findById(idCartao);
+        Optional<Cartao> cartaoBuscado = cartaoRepository.findByNumeroCartao(idCartao);
 
         if (cartaoBuscado.isEmpty()) {
             logger.warn("[Bloqueio de cartão]: Não foi possível encontrar o cartão [id]: {}", idCartao);
@@ -47,12 +50,6 @@ public class BloqueioDeCartaoController {
         cartao.setBloqueios(bloqueio);
         cartaoRepository.save(cartao);
 
-        logger.info("[Bloqueio de cartão]: Bloqueio realizado [id]: {}", cartao.getId());
-
-        return ResponseEntity
-                .created(builder.path("/api/bloqueios/{id}")
-                        .buildAndExpand(bloqueio.getId())
-                        .toUri())
-                .build();
+        return ResponseEntity.created(builder.path("/api/bloqueios/{id}").buildAndExpand(bloqueio.getId()).toUri()).build();
     }
 }
