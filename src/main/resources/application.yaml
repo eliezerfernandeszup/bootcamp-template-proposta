@@ -39,12 +39,16 @@ servicos-externos:
   base-url: http://localhost:9999
   cartoes: http://localhost:8888
 
-##health-check
+##metricas
 management:
   endpoints:
     web:
       exposure:
-        include=health,metrics,prometheus:
+        include: info,health,prometheus
+  metrics:
+    tags:
+      ambiente: ${AMBIENTE:desenvolvimento}
+      aplicacao: ${NOME_DA_APLICACAO:serviço de proposta}
 
 #schedue
 periodicidade-schedue:
