@@ -3,6 +3,7 @@ package br.com.zup.bootcamp.proposta.service;
 import br.com.zup.bootcamp.proposta.model.Aviso;
 import br.com.zup.bootcamp.proposta.model.Cartao;
 import br.com.zup.bootcamp.proposta.model.request.AvisoRequest;
+import br.com.zup.bootcamp.proposta.model.response.ResultadoAvisoViagem;
 import br.com.zup.bootcamp.proposta.repository.AvisoRepository;
 import br.com.zup.bootcamp.proposta.repository.CartaoRepository;
 import br.com.zup.bootcamp.proposta.service.feign.CartoesCliente;
@@ -43,7 +44,7 @@ public class AvisoViagemService {
         try {
             final var response = cartoesCliente.enviarAvisoDeViagem(cartao.getNumeroCartao(), avisoRequest);
 
-            if (response.getStatusCode().is2xxSuccessful()) {
+            if (response.getBody() == ResultadoAvisoViagem.CRIADO) {
 
                 avisoViagem = avisoRequest.toAviso(request);
                 avisoRepository.save(avisoViagem);
