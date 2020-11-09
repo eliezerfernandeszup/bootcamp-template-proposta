@@ -48,7 +48,7 @@ public class AvisoViagemService {
 
                 avisoViagem = avisoRequest.toAviso(request);
                 avisoRepository.save(avisoViagem);
-                logger.info("[Aviso Viagem]: Salvando aviso: {}", avisoViagem.getId());
+                logger.info("[Aviso Viagem]: Salvando aviso viagem: {}", avisoViagem.getId());
 
                 cartao.setAvisosViagens(avisoViagem);
                 cartaoRepository.save(cartao);
