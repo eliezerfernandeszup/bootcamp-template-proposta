@@ -47,7 +47,6 @@ public class Proposta {
     private boolean cartaoCriado;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "proposta_id")
     private Cartao cartao;
 
     @Deprecated

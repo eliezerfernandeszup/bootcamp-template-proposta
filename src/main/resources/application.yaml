@@ -22,6 +22,8 @@ spring:
         jwt:
           issuer-uri: ${KEYCLOAK_ISSUER_URI:http://localhost:18080/auth/realms/nosso-cartao}
           jwk-set-uri: ${KEYCLOAK_JWKS_URI:http://localhost:18080/auth/realms/nosso-cartao/protocol/openid-connect/certs}
+  application:
+    name: proposta
 
 
 #timeouts do Feign
@@ -44,6 +46,6 @@ management:
       exposure:
         include=health,metrics,prometheus:
 
-#health-check
+#schedue
 periodicidade-schedue:
   criar-cartao : 5000

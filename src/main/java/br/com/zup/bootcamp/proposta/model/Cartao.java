@@ -1,5 +1,6 @@
 package br.com.zup.bootcamp.proposta.model;
 
+import br.com.zup.bootcamp.proposta.model.enums.EstadoCartao;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.util.Assert;
 
@@ -24,8 +25,14 @@ public class Cartao {
     @NotNull
     private LocalDateTime emitidoEm;
 
+    @Enumerated(EnumType.STRING)
+    private EstadoCartao estadoCartao;
+
     @OneToMany(cascade = CascadeType.ALL)
     private Set<Biometria> biometrias = new HashSet<>();
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<Bloqueio> bloqueios = new HashSet<>();
 
     @Deprecated
     public Cartao(){
@@ -34,6 +41,7 @@ public class Cartao {
     public Cartao(@NotNull UUID numeroCartao, @NotNull LocalDateTime emitidoEm) {
         this.numeroCartao = numeroCartao;
         this.emitidoEm = emitidoEm;
+        this.estadoCartao = EstadoCartao.DESBLOQUEADO;
     }
 
     public UUID getId() {
@@ -63,6 +71,19 @@ public class Cartao {
     public void setBiometria(Biometria biometria) {
         Assert.notNull(biometria, "A biometria não pode ser nula");
         biometrias.add(biometria);
+    }
+
+    public void setBloqueios(Bloqueio bloqueio) {
+        Assert.notNull(bloqueio, "O bloqueio não pode ser nula");
+        bloqueios.add(bloqueio);
+    }
+
+    public void bloquearCartao() {
+        this.estadoCartao = EstadoCartao.BLOQUEADO;
+    }
+
+    public boolean verificarSeCartaoEstaBloqueado(){
+        return estadoCartao.equals(EstadoCartao.BLOQUEADO);
     }
 
     @Override
