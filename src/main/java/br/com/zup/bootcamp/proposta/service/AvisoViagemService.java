@@ -52,7 +52,7 @@ public class AvisoViagemService {
 
                 cartao.setAvisosViagens(avisoViagem);
                 cartaoRepository.save(cartao);
-                logger.warn("[Aviso Viagem]: Associando aviso ao cartão id: {}", cartao.getId());
+                logger.info("[Aviso Viagem]: Associando aviso ao cartão id: {}", cartao.getId());
             }
         }catch (FeignException exception) {
             logger.warn("[Aviso Viagem]: Não foi possível criar aviso para o cartão: {}", exception.contentUTF8());

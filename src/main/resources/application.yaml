@@ -31,8 +31,8 @@ feign:
   client:
     config:
       analise-proposta:
-        connect-timeout: 100
-        read-timeout: 100
+        connect-timeout: 1000
+        read-timeout: 1000
 
 #Urls de servicos externos
 servicos-externos:

@@ -21,15 +21,13 @@ import java.util.UUID;
 @RequestMapping(value = "/api/cartoes")
 public class AvisoViagemController {
 
-    private Logger logger = LoggerFactory.getLogger(AvisoViagemController.class);
+    private final Logger logger = LoggerFactory.getLogger(AvisoViagemController.class);
     private final CartaoRepository cartaoRepository;
     private final AvisoViagemService avisoViagemService;
-    private final CartoesCliente cartoesCliente;
 
-    public AvisoViagemController(CartaoRepository cartaoRepository, AvisoViagemService avisoViagemService, CartoesCliente cartoesCliente) {
+    public AvisoViagemController(CartaoRepository cartaoRepository, AvisoViagemService avisoViagemService) {
         this.cartaoRepository = cartaoRepository;
         this.avisoViagemService = avisoViagemService;
-        this.cartoesCliente = cartoesCliente;
     }
 
     @PostMapping(value = "/{idCartao}/avisos")
