@@ -53,3 +53,13 @@ management:
 #schedue
 periodicidade-schedue:
   criar-cartao : 5000
+
+# Jaeger
+opentracing:
+  jaeger:
+    enabled: ${JAEGER_ENABLED:true}
+    http-sender:
+      url: ${JAEGER_ENDPOINT:http://localhost:14268/api/traces}
+    probabilistic-sampler:
+      sampling-rate: ${JAEGER_SAMPLER:1}
+    service-name: ${spring.application.name}
