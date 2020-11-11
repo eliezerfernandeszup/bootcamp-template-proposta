@@ -2,7 +2,6 @@ package br.com.zup.bootcamp.proposta.service;
 
 import br.com.zup.bootcamp.proposta.model.Cartao;
 import br.com.zup.bootcamp.proposta.model.Carteira;
-import br.com.zup.bootcamp.proposta.model.enums.ResultadoCarteiraStatus;
 import br.com.zup.bootcamp.proposta.model.request.CarteiraRequest;
 import br.com.zup.bootcamp.proposta.repository.CartaoRepository;
 import br.com.zup.bootcamp.proposta.repository.CarteiraRepository;
@@ -16,7 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
-import java.util.Objects;
 
 @Service
 public class CarteiraDigitalService {
@@ -42,7 +40,7 @@ public class CarteiraDigitalService {
             if (response.getStatusCode().is2xxSuccessful()) {
 
                 carteiraRepository.save(carteira);
-                logger.info("[Carteira Digital]: Salvando carteira digital: {}");
+                logger.info("[Carteira Digital]: Salvando carteira digital: {}", carteira.getId());
 
                 cartao.setCarteiras(carteira);
                 cartaoRepository.save(cartao);

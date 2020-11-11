@@ -2,6 +2,7 @@ package br.com.zup.bootcamp.proposta.model;
 
 import br.com.zup.bootcamp.proposta.model.enums.CarteirasDisponiveis;
 import br.com.zup.bootcamp.proposta.model.enums.EstadoCartao;
+import br.com.zup.bootcamp.proposta.security.JwtUtils;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.util.Assert;
 
@@ -40,6 +41,9 @@ public class Cartao {
 
     @OneToMany(cascade = CascadeType.PERSIST)
     private Set<Carteira> carteiras = new HashSet<>();
+
+    @OneToOne
+    private Proposta proposta;
 
     @Deprecated
     public Cartao(){
@@ -95,6 +99,11 @@ public class Cartao {
         this.carteiras.add(carteira);
     }
 
+    public void setProposta(Proposta proposta) {
+        Assert.notNull(proposta, "A proposta não pode ser nulo");
+        this.proposta = proposta;
+    }
+
     public void bloquearCartao() {
         this.estadoCartao = EstadoCartao.BLOQUEADO;
     }
@@ -125,5 +134,10 @@ public class Cartao {
     public boolean verificarSeExisteCarteiraAssociada(CarteirasDisponiveis carteirasDisponivel) {
         Assert.notNull(carteirasDisponivel, "A Carteira não pode ser nula.");
         return carteiras.stream().anyMatch(carteira -> carteira.verificarCarteira(carteirasDisponivel));
+    }
+
+    public boolean verificarSeCartaoEIgualAoEmailToken() {
+        String userEmail = JwtUtils.getUserEmail();
+        return this.proposta.getEmail().equals(userEmail);
     }
 }

@@ -1,19 +1,21 @@
 package br.com.zup.bootcamp.proposta.controller;
 
+import br.com.zup.bootcamp.proposta.advice.ErroPadronizado;
 import br.com.zup.bootcamp.proposta.model.Aviso;
 import br.com.zup.bootcamp.proposta.model.Cartao;
 import br.com.zup.bootcamp.proposta.model.request.AvisoRequest;
 import br.com.zup.bootcamp.proposta.repository.CartaoRepository;
 import br.com.zup.bootcamp.proposta.service.AvisoViagemService;
-import br.com.zup.bootcamp.proposta.service.feign.CartoesCliente;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.Collections;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -42,6 +44,12 @@ public class AvisoViagemController {
         }
 
         Cartao cartao = cartaoBuscado.get();
+
+        if (!cartao.verificarSeCartaoEIgualAoEmailToken()){
+            logger.warn("[Aviso viagem]: O usuário logado não tem permissão para adicionar aviso no cartao: {}", idCartao);
+            return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                    .body(new ErroPadronizado(Collections.singletonList("Cartão não pertencente ao solicitante")));
+        }
 
         Aviso aviso = avisoViagemService.realizarAviso(cartao, avisoRequest, request);
 
