@@ -39,15 +39,14 @@ public class CarteiraDigitalService {
         try {
             final var response = cartoesCliente.adicionarCarteira(cartao.getNumeroCartao(), carteiraRequest);
 
-            if (Objects.requireNonNull(response.getBody()).getResultadoCarteira() == ResultadoCarteiraStatus.ASSOCIADA) {
+            if (response.getStatusCode().is2xxSuccessful()) {
 
                 carteiraRepository.save(carteira);
                 logger.info("[Carteira Digital]: Salvando carteira digital: {}");
 
                 cartao.setCarteiras(carteira);
                 cartaoRepository.save(cartao);
-                logger.warn("[Carteira Digital]: Associando aviso ao cartão id: {}", cartao.getId());
-
+                logger.info("[Carteira Digital]: Associando carteira ao cartão id: {}", cartao.getId());
             }
         }catch (FeignException exception){
             logger.warn(exception.contentUTF8());
