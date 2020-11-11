@@ -1,7 +1,7 @@
 package br.com.zup.bootcamp.proposta.controller;
 
+import br.com.zup.bootcamp.proposta.advice.ErroPadronizado;
 import br.com.zup.bootcamp.proposta.model.Cartao;
-import br.com.zup.bootcamp.proposta.model.Carteira;
 import br.com.zup.bootcamp.proposta.model.request.CarteiraRequest;
 import br.com.zup.bootcamp.proposta.repository.CartaoRepository;
 import br.com.zup.bootcamp.proposta.service.CarteiraDigitalService;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.util.Collections;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -41,6 +42,12 @@ public class CarteiraDigitalController {
         }
 
         Cartao cartao = cartaoBuscado.get();
+
+        if (!cartao.verificarSeCartaoEIgualAoEmailToken()){
+            logger.warn("[Bloqueio de cartão]: O usuário logado não tem permissão para bloquear o cartao: {}", idCartao);
+            return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                    .body(new ErroPadronizado(Collections.singletonList("Cartão não pertencente ao solicitante")));
+        }
 
         if (cartao.verificarSeExisteCarteiraAssociada(carteiraRequest.getCarteira())){
             logger.warn("[Carteira Digital]: Não foi possível encontrar o cartão [id]: {}", idCartao);

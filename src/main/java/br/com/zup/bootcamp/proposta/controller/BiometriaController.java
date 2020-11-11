@@ -1,16 +1,19 @@
 package br.com.zup.bootcamp.proposta.controller;
 
+import br.com.zup.bootcamp.proposta.advice.ErroPadronizado;
 import br.com.zup.bootcamp.proposta.model.Biometria;
 import br.com.zup.bootcamp.proposta.model.Cartao;
 import br.com.zup.bootcamp.proposta.model.request.BiometriaRequest;
 import br.com.zup.bootcamp.proposta.repository.CartaoRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.util.Collections;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -38,6 +41,13 @@ public class BiometriaController {
         }
 
         Cartao cartao = cartaoBuscado.get();
+
+        if (!cartao.verificarSeCartaoEIgualAoEmailToken()){
+            logger.warn("[Cadastro de biometria]: O usuário logado não tem permissão para alterar o cartao: {}", idCartao);
+            return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                    .body(new ErroPadronizado(Collections.singletonList("Cartão não pertencente ao solicitante")));
+        }
+
         cartao.setBiometria(biometria);
         cartaoRepository.save(cartao);
 
