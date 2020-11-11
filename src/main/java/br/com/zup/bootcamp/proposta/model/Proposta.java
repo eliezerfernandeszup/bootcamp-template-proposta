@@ -92,6 +92,10 @@ public class Proposta {
         return propostaStatus;
     }
 
+    public Cartao getCartao() {
+        return cartao;
+    }
+
     public boolean isCartaoCriado() {
         return cartaoCriado;
     }
