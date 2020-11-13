@@ -83,6 +83,7 @@
     prometheus:
       image: prom/prometheus
       volumes:
+        - ./prometheus.yml:/etc/prometheus/prometheus.yml
         - prometheus-volume:/etc/prometheus/
 #      network_mode: host
       ports:
