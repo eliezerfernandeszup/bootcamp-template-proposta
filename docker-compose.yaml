@@ -84,7 +84,9 @@
       image: prom/prometheus
       volumes:
         - prometheus-volume:/etc/prometheus/
-      network_mode: host
+#      network_mode: host
+      ports:
+      - 9090:9090
       expose:
         - 9090
 
@@ -92,7 +94,9 @@
       image: grafana/grafana
       volumes:
         - grafana-volume:/var/lib/grafana
-      network_mode: host
+#      network_mode: host
+      ports:
+      - 3000:3000
       expose:
         - 3000
       depends_on:
